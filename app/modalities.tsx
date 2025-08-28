@@ -17,9 +17,9 @@ const readModalities = async () => {
 async function loadModalities() {
     let data = await readModalities()
     if (!data) {
-        const response = await fetch(modalities_data_link)
-        data = await response.json()
-        await saveModalities(data)
+    const response = await fetch(modalities_data_link)
+    data = await response.json()
+    await saveModalities(data)
     }
     return data
 }
@@ -27,9 +27,15 @@ async function loadModalities() {
 const modalityRender = (item) => {
     return (
         <Pressable style={styles.pressable}>
-            <Text> {item.modalidade} </Text>
-            <Text> {item.local.nome} </Text>
-            <Image style={styles.arrow} source={require("../assets/images/arrow-right.png")}/>
+            <View style={styles.buttonContent}>
+                <Image source={{uri:item.icone, method:"GET"}}
+                       style={styles.icon}/>
+                <Text style={styles.mainText}> {item.modalidade} </Text>
+            </View>
+            <View style={styles.buttonContent}>
+                <Text style={styles.text}> Local: {item.local.nome} </Text>
+                <Image style={styles.arrow} source={require("../assets/images/arrow-right.png")}/>
+            </View>
         </Pressable>
     )
 }
@@ -76,7 +82,6 @@ const styles = StyleSheet.create({
     pressable: {
         alignItems: "center",
         justifyContent:"space-between",
-        paddingHorizontal:25,
         flexDirection: "row",
         height: 90,
         width: 350,
@@ -85,7 +90,25 @@ const styles = StyleSheet.create({
         borderRadius: 25
     },
     arrow:{
-        height:10,
-        width:10,
-    }
+        height:20,
+        width:20,
+        marginLeft:5
+    },
+    icon:{
+        width:40,
+        height:40
+    },
+    mainText: {
+        fontSize:18,
+        fontWeight:"bold",
+        marginLeft:10
+    },
+    text:{
+        fontSize:16
+    },
+    buttonContent:{
+        flexDirection:"row",
+        alignItems: "center",
+        paddingHorizontal: 18,
+    },
 })
