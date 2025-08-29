@@ -8,7 +8,7 @@ function TabBarIcon(props: { name: React.ComponentProps<typeof FontAwesome>['nam
 
 export default function TabLayout() {
     return (
-        <Tabs>
+        <Tabs backBehavior="history">
             <Tabs.Screen
                 name="index"
                 options={{
@@ -18,7 +18,7 @@ export default function TabLayout() {
                 }}
             />
             <Tabs.Screen
-                name="modalities"
+                name="modalities/index"
                 options={{
                     title: 'Modalidades',
                     headerShown: false,
@@ -39,6 +39,13 @@ export default function TabLayout() {
                     title: 'Meus Interesses',
                     headerShown: false,
                     tabBarIcon: ({ color }) => <TabBarIcon name="heart" color={color} />,
+                }}
+            />
+            <Tabs.Screen
+                name="modalities/[id]"
+                options={{
+                    href: null,
+                    headerShown: false
                 }}
             />
         </Tabs>
