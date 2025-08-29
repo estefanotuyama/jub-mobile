@@ -5,31 +5,34 @@ import {
     StyleSheet,
     SafeAreaView,
     StatusBar,
-    Pressable,
+    Pressable, Animated,
 } from "react-native";
 import { router } from "expo-router"
+import ScrollView = Animated.ScrollView;
 
 
 export default function Index() {
     return (
-        <SafeAreaView style={styles.container}>
-            <StatusBar barStyle={"default"} />
-            <Image source ={require('../assets/images/home-image.jpg')}
-                   style={styles.image}
-            />
-            <View style = {styles.contentContainer}>
-                <Image source={require('../assets/images/JUBs-logo.png')}
-                       style={styles.logo}/>
-                <View style={styles.textContainer}>
-                    <Text style={styles.titleText}>Jogos Universitários Brasileiros 2025</Text>
-                    <Text style={styles.regularText}>Florianópolis</Text>
-                    <Text style={styles.regularText}>De 01/06/2025 a 21/06/2025</Text>
+        <ScrollView>
+            <SafeAreaView style={styles.container}>
+                <StatusBar barStyle={"default"} />
+                <Image source ={require('../assets/images/home-image.jpg')}
+                       style={styles.image}
+                />
+                <View style = {styles.contentContainer}>
+                    <Image source={require('../assets/images/JUBs-logo.png')}
+                           style={styles.logo}/>
+                    <View style={styles.textContainer}>
+                        <Text style={styles.titleText}>Jogos Universitários Brasileiros 2025</Text>
+                        <Text style={styles.regularText}>Florianópolis</Text>
+                        <Text style={styles.regularText}>De 01/06/2025 a 21/06/2025</Text>
+                    </View>
                 </View>
-            </View>
-            <Pressable style={styles.button} onPress={() => router.push('/modalities')}>
-                <Text style={styles.buttonText}> Ver Modalidades </Text>
-            </Pressable>
-        </SafeAreaView>
+                <Pressable style={styles.button} onPress={() => router.push('/modalities')}>
+                    <Text style={styles.buttonText}> Ver Modalidades </Text>
+                </Pressable>
+            </SafeAreaView>
+        </ScrollView>
     )
 }
 
@@ -43,7 +46,7 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "center",
-        padding: 20
+        padding: 32
     },
     image: {
         width: '100%',

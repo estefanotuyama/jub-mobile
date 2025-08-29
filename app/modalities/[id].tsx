@@ -1,72 +1,89 @@
-import {Image, Pressable, SafeAreaView, StatusBar, StyleSheet, Text, View} from "react-native";
+import {
+    Animated,
+    Image,
+    Linking,
+    Platform,
+    Pressable,
+    SafeAreaView,
+    StatusBar,
+    StyleSheet,
+    Text,
+    View
+} from "react-native";
 import {router, useLocalSearchParams} from "expo-router";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
+import ScrollView = Animated.ScrollView;
 
+const mapUrl = Platform.select({
+    ios: 'maps:0,0?q=',
+    android: 'geo:0,0?q=',
+});
 
 export default function ModalityDetails() {
 
     const modality = useLocalSearchParams();
-    console.log(modality)
 
     return (
-        <SafeAreaView style={styles.container}>
-            <StatusBar barStyle={"default"}/>
-                <View style={styles.contentContainer}>
+        <ScrollView>
+            <SafeAreaView style={styles.container}>
+                <StatusBar barStyle={"default"}/>
+                    <View style={styles.contentContainer}>
 
-                    <View style={styles.topContainer}>
-                        <Pressable style={styles.backButton} onPress={() => router.push('/modalities/')}>
-                            <Image source={require('../../assets/images/back-arrow.png')}
-                                   style={styles.icon}/>
+                        <View style={styles.topContainer}>
+                            <Pressable style={styles.backButton} onPress={() => router.push('/modalities/')}>
+                                <Image source={require('../../assets/images/back-arrow.png')}
+                                       style={styles.icon}/>
+                            </Pressable>
+
+                            <View style={styles.titleContainer}>
+                                <Image source={{uri:modality.icone}} style={styles.icon}/>
+                                <Text style={styles.title}>{modality.modalidade}</Text>
+                            </View>
+                        </View>
+
+                        <View style={styles.imageContainer}>
+                            <Image source={{uri:modality.imagem_detalhe}} style={styles.image}/>
+                        </View>
+
+                        <View style={styles.infoCard}>
+                            <Text style={styles.infoCardTitle}>Informações</Text>
+
+                            <View style={styles.infoRow}>
+                                <FontAwesome name="calendar" size={20} color="#555" style={styles.infoIcon} />
+                                <View style={styles.infoTextContainer}>
+                                    <Text style={styles.infoLabel}>Datas</Text>
+                                    <Text style={styles.infoValue}>De {modality.data_inicio} a {modality.data_fim}</Text>
+                                </View>
+                            </View>
+
+                            <View style={styles.infoRow}>
+                                <FontAwesome name="clock-o" size={20} color="#555" style={styles.infoIcon} />
+                                <View style={styles.infoTextContainer}>
+                                    <Text style={styles.infoLabel}>Horário</Text>
+                                    <Text style={styles.infoValue}>Das {modality.horarios}</Text>
+                                </View>
+                            </View>
+
+                            <View style={styles.infoRow}>
+                                <FontAwesome name="map-marker" size={20} color="#555" style={styles.infoIcon} />
+                                <View style={styles.infoTextContainer}>
+                                    <Text style={styles.infoLabel}>Local</Text>
+                                    <Text style={styles.infoValue}>{modality.local}</Text>
+                                </View>
+                            </View>
+                        </View>
+
+                        <Pressable style={styles.button}>
+                            <Text style={styles.buttonText}>Meus Interesses</Text>
+                            <FontAwesome name={"heart"} size={20} color="#fff" style={styles.iconButton}></FontAwesome>
                         </Pressable>
-
-                        <View style={styles.titleContainer}>
-                            <Image source={{uri:modality.icone}} style={styles.icon}/>
-                            <Text style={styles.title}>{modality.modalidade}</Text>
-                        </View>
+                        <Pressable style={styles.button} onPress={() => Linking.openURL(`${mapUrl}${modality.local_lat}, ${modality.local_long}`)}>
+                                <Text style={styles.buttonText}>Ver no Mapa</Text>
+                                <FontAwesome name={"map-marker"} size={20} color="#fff" style={styles.iconButton}></FontAwesome>
+                        </Pressable>
                     </View>
-
-                    <View style={styles.imageContainer}>
-                        <Image source={{uri:modality.imagem_detalhe}} style={styles.image}/>
-                    </View>
-
-                    <View style={styles.infoCard}>
-                        <Text style={styles.infoCardTitle}>Informações</Text>
-
-                        <View style={styles.infoRow}>
-                            <FontAwesome name="calendar" size={20} color="#555" style={styles.infoIcon} />
-                            <View style={styles.infoTextContainer}>
-                                <Text style={styles.infoLabel}>Datas</Text>
-                                <Text style={styles.infoValue}>De {modality.data_inicio} a {modality.data_fim}</Text>
-                            </View>
-                        </View>
-
-                        <View style={styles.infoRow}>
-                            <FontAwesome name="clock-o" size={20} color="#555" style={styles.infoIcon} />
-                            <View style={styles.infoTextContainer}>
-                                <Text style={styles.infoLabel}>Horário</Text>
-                                <Text style={styles.infoValue}>Das {modality.horarios}</Text>
-                            </View>
-                        </View>
-
-                        <View style={styles.infoRow}>
-                            <FontAwesome name="map-marker" size={20} color="#555" style={styles.infoIcon} />
-                            <View style={styles.infoTextContainer}>
-                                <Text style={styles.infoLabel}>Local</Text>
-                                <Text style={styles.infoValue}>{modality.local}</Text>
-                            </View>
-                        </View>
-                    </View>
-
-                    <Pressable style={styles.button}>
-                        <Text style={styles.buttonText}>Meus Interesses</Text>
-                        <FontAwesome name={"heart"} size={20} color="#fff" style={styles.iconButton}></FontAwesome>
-                    </Pressable>
-                    <Pressable style={styles.button}>
-                            <Text style={styles.buttonText}>Ver no Mapa</Text>
-                            <FontAwesome name={"map-marker"} size={20} color="#fff" style={styles.iconButton}></FontAwesome>
-                    </Pressable>
-                </View>
-        </SafeAreaView>
+            </SafeAreaView>
+        </ScrollView>
     )
 }
 

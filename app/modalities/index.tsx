@@ -1,4 +1,4 @@
-import {SafeAreaView, StatusBar, Text, View, StyleSheet, Pressable, FlatList, Image} from "react-native";
+import {SafeAreaView, StatusBar, Text, View, StyleSheet, Pressable, FlatList, Image, Animated} from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {useEffect, useState} from "react";
 import {router} from "expo-router";
@@ -57,8 +57,10 @@ export default function Index() {
         <SafeAreaView style={styles.container}>
             <StatusBar barStyle={"default"}/>
             <View style={styles.contentContainer}>
-                <Text style={styles.title}>Programação</Text>
                 <FlatList
+                    ListHeaderComponent={
+                        <Text style={styles.title}>Programação</Text>
+                    }
                     data={data}
                     renderItem={({item}) => modalityRender(item)}
                     keyExtractor={item => item.id}/>
@@ -72,9 +74,8 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     contentContainer: {
-        flexDirection:"column",
-        alignItems:"flex-start",
-        padding:40,
+        flex: 1,
+        padding: 20
     },
     title: {
         fontSize: 32,
@@ -86,7 +87,6 @@ const styles = StyleSheet.create({
         justifyContent:"space-between",
         flexDirection: "row",
         height: 90,
-        width: 350,
         backgroundColor: "white",
         marginBottom:20,
         borderRadius: 25,
