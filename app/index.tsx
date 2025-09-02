@@ -71,13 +71,13 @@ const styles = StyleSheet.create({
 		paddingLeft: 20
 	},
 	titleText: {
-		fontSize: 24,
+		fontSize: 20,
 		fontWeight: 'bold',
 	},
 	regularText: {
-		fontSize: 18,
+		fontSize: 16,
 		fontWeight: "normal",
-		marginTop: 4
+		marginTop: 5
 	},
 	buttonText: {
 		fontSize: 18,
