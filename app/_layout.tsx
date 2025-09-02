@@ -26,7 +26,7 @@ export default function TabLayout() {
                 }}
             />
             <Tabs.Screen
-                name="accomodations"
+                name="accomodations/index"
                 options={{
                     title: 'Alojamentos',
                     headerShown: false,
@@ -34,7 +34,7 @@ export default function TabLayout() {
                 }}
             />
             <Tabs.Screen
-                name="favorites"
+                name="favorites/index"
                 options={{
                     title: 'Meus Interesses',
                     headerShown: false,
@@ -46,6 +46,13 @@ export default function TabLayout() {
                 options={{
                     href: null,
                     headerShown: false
+                }}
+            />
+            <Tabs.Screen
+               name="accomodations/[id]"
+                options={{
+                    href: null,
+                    headerShown: false,
                 }}
             />
         </Tabs>

@@ -1,23 +1,35 @@
 import {
-    Animated,
-    Image,
-    Linking,
-    Platform,
-    Pressable,
-    SafeAreaView,
-    StatusBar,
-    StyleSheet,
-    Text,
-    View
+  Alert, Animated, Image, Linking, Platform, Pressable, SafeAreaView, StatusBar, StyleSheet, Text, View
 } from "react-native";
 import {router, useLocalSearchParams} from "expo-router";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import ScrollView = Animated.ScrollView;
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const mapUrl = Platform.select({
     ios: 'maps:0,0?q=',
     android: 'geo:0,0?q=',
 });
+
+const saveFavorite = async (modality) => {
+    try {
+        const existingFavorites = await AsyncStorage.getItem('favorites');
+        let favorites = existingFavorites ? JSON.parse(existingFavorites) : [];
+
+        const isAlreadyFavorite = favorites.some(fav => fav.id === modality.id);
+
+        if (isAlreadyFavorite) {
+            Alert.alert("Interesse já adicionado", "Esta modalidade já está na sua lista.");
+        } else {
+            favorites.push(modality);
+            await AsyncStorage.setItem('favorites', JSON.stringify(favorites));
+            Alert.alert("Sucesso!", "Modalidade adicionada aos seus interesses.");
+        }
+    } catch (error) {
+        console.error("Erro ao salvar favorito:", error);
+        Alert.alert("Erro", "Não foi possível adicionar aos interesses.");
+    }
+};
 
 export default function ModalityDetails() {
 
@@ -73,7 +85,7 @@ export default function ModalityDetails() {
                             </View>
                         </View>
 
-                        <Pressable style={styles.button}>
+                        <Pressable style={styles.button} onPress={() => saveFavorite(modality)}>
                             <Text style={styles.buttonText}>Meus Interesses</Text>
                             <FontAwesome name={"heart"} size={20} color="#fff" style={styles.iconButton}></FontAwesome>
                         </Pressable>
