@@ -10,6 +10,7 @@ import {
 	Dimensions,
 } from "react-native";
 import { router } from "expo-router";
+import data from '../data.json';
 
 const carouselData = [
 	{ id: '1', image: require('../assets/images/caroussel-1.png') },
@@ -39,9 +40,9 @@ export default function Index() {
 				<View style={styles.contentContainer}>
 					<Image source={require('../assets/images/JUBs-logo.png')} style={styles.logo} />
 					<View style={styles.textContainer}>
-						<Text style={styles.titleText}>Jogos Universitários Brasileiros 2025</Text>
-						<Text style={styles.regularText}>Florianópolis</Text>
-						<Text style={styles.regularText}>De 01/06/2025 a 21/06/2025</Text>
+						<Text style={styles.titleText}>Jogos Universitários Brasileiros {data.ano}</Text>
+						<Text style={styles.regularText}>{data.local}</Text>
+						<Text style={styles.regularText}>De {data.data_inicio} a {data.data_fim}</Text>
 					</View>
 				</View>
 
