@@ -100,10 +100,15 @@ export default function AccomodationDetails() {
           </View>
         </View>
 
-        <Pressable style={styles.button}
-                   onPress={() => Linking.openURL(`${mapUrl}${acommodation.lat},${acommodation.long}`)}>
-          <Text style={styles.buttonText}>Ver no Mapa</Text>
-          <FontAwesome name={"map-marker"} size={20} color="#fff"/>
+        <Pressable style={styles.mapContainer} onPress={() => Linking.openURL(`${mapUrl}${acommodation.lat},${acommodation.long}`)}>
+          <Image
+            source={{ uri: acommodation.maps as string }}
+            style={styles.mapImage}
+          />
+          <View style={styles.mapOverlay}>
+            <Text style={styles.mapCaption}>Ver no Mapa</Text>
+            <FontAwesome name="map-marker" size={16} color="#fff" style={{marginLeft: 8}} />
+          </View>
         </Pressable>
       </View>
     </ScrollView>
@@ -125,7 +130,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFF',
   }, backButton: {
     position: 'absolute',
-    top: StatusBar.currentHeight ? StatusBar.currentHeight - 15 : 40,
+    top: StatusBar.currentHeight ? StatusBar.currentHeight - 10 : 40,
     left: 20,
     zIndex: 1,
     backgroundColor: 'rgba(0,0,0,0.4)',
@@ -164,8 +169,27 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-  }, buttonText: {
-    fontSize: 18, color: "#fff", fontWeight: "bold", marginRight: 12
+  }, mapContainer: {
+    borderRadius: 15,
+    overflow: 'hidden',
+    marginBottom: 20,
+  }, mapImage: {
+    width: '100%',
+    height: 150,
+  }, mapOverlay: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    padding: 12,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  }, mapCaption: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: 'bold',
   }, linkText: {
     color: '#007AFF',
   },
