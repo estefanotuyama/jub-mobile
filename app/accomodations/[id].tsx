@@ -77,20 +77,20 @@ export default function AccomodationDetails() {
               <Text style={styles.infoValue}>{acommodation.valor}</Text>
             </View>
           </View>
-          <View style={styles.infoRow}>
+          <Pressable style={styles.infoRow} onPress={() => Linking.openURL(`mailto:${acommodation.email}`)}>
             <FontAwesome name="envelope-o" size={20} color="#555" style={styles.infoIcon}/>
             <View style={styles.infoTextContainer}>
               <Text style={styles.infoLabel}>Email para contato</Text>
-              <Text style={styles.infoValue}>{acommodation.email}</Text>
+              <Text style={[styles.infoValue, styles.linkText]}>{acommodation.email}</Text>
             </View>
-          </View>
-          <View style={styles.infoRow}>
+          </Pressable>
+          <Pressable style={styles.infoRow} onPress={() => Linking.openURL(`tel:${acommodation.telefone.replace(/\D/g, '')}`)}>
             <FontAwesome name="phone" size={20} color="#555" style={styles.infoIcon}/>
             <View style={styles.infoTextContainer}>
               <Text style={styles.infoLabel}>Telefone para contato</Text>
-              <Text style={styles.infoValue}>{acommodation.telefone}</Text>
+              <Text style={[styles.infoValue, styles.linkText]}>{acommodation.telefone}</Text>
             </View>
-          </View>
+          </Pressable>
           <View style={styles.infoRow}>
             <FontAwesome name="map-marker" size={20} color="#555" style={styles.infoIcon}/>
             <View style={styles.infoTextContainer}>
@@ -166,5 +166,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   }, buttonText: {
     fontSize: 18, color: "#fff", fontWeight: "bold", marginRight: 12
+  }, linkText: {
+    color: '#007AFF',
   },
 });
