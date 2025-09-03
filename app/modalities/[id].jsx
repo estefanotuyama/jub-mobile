@@ -1,9 +1,8 @@
 import {
-  Alert, Animated, Image, Linking, Platform, Pressable, SafeAreaView, StatusBar, StyleSheet, Text, View
+  Alert, Animated, Image, Linking, Platform, Pressable, SafeAreaView, StatusBar, StyleSheet, Text, View, ScrollView
 } from "react-native";
 import {router, useLocalSearchParams} from "expo-router";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
-import ScrollView = Animated.ScrollView;
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const mapUrl = Platform.select({

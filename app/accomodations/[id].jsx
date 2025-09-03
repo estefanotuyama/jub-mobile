@@ -15,7 +15,7 @@ const mapUrl = Platform.select({
 export default function AccomodationDetails() {
   const acommodation = useLocalSearchParams();
 
-  const fotosArray = JSON.parse(acommodation.fotos as string || '[]');
+  const fotosArray = JSON.parse(acommodation.fotos || '[]');
   const [activeIndex, setActiveIndex] = useState(0);
   const scrollViewRef = useRef(null);
 
@@ -102,7 +102,7 @@ export default function AccomodationDetails() {
 
         <Pressable style={styles.mapContainer} onPress={() => Linking.openURL(`${mapUrl}${acommodation.lat},${acommodation.long}`)}>
           <Image
-            source={{ uri: acommodation.maps as string }}
+            source={{ uri: acommodation.maps }}
             style={styles.mapImage}
           />
           <View style={styles.mapOverlay}>

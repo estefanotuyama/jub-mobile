@@ -1,4 +1,4 @@
-import {SafeAreaView, StatusBar, Text, View, StyleSheet, Pressable, FlatList, Image, Animated} from "react-native";
+import {SafeAreaView, StatusBar, Text, View, StyleSheet, Pressable, FlatList, Image} from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {useEffect, useState} from "react";
 import {router} from "expo-router";
